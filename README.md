@@ -6,4 +6,5 @@ for [My nerd story](http://mynerdstory.org).
 
 - unshorten urls
 - ignore duplicated urls
-
+- generate excel with twitter username, tweet text, url to link, date
+    - if two or more urls -> then just add another row

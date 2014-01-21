@@ -9,10 +9,14 @@ var twitterAuth = twitter({
   consumerSecret: nconf.get('twitterConsumerSecret'),
   completeCallback: '/'
 });
+var unshortener = require('unshortener');
 
 var twitterQuery = '"my nerd story" OR #mynerdstory';
 var twitterToken = nconf.get('twitterToken');
 var twitterTokenSecret = nconf.get('twitterTokenSecret');
+
+
+// ~~~
 
 
 doTwitterSearch();
@@ -36,6 +40,18 @@ function doTwitterSearch() {
       tweetsWithURLs.forEach(function(t) {
         console.log(t.text);
         console.log(t.urls);
+      });
+
+      var firstURL = tweetsWithURLs[0].urls[0].url;
+      unshortener.expand(firstURL, function(err, url) {
+
+        if(err) {
+          console.log(err);
+          return;
+        }
+
+        console.log(firstURL, url);
+
       });
 
     }
