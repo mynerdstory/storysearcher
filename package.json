@@ -11,6 +11,7 @@
   "dependencies": {
     "twitter-oauth": "0.0.6",
     "nconf": "~0.6.9",
-    "request": "~2.33.0"
+    "request": "~2.33.0",
+    "twitter-text": "~1.7.0"
   }
 }

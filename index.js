@@ -1,6 +1,7 @@
 var nconf = require('nconf');
 nconf.argv().env().file({ file: 'local.json' });
 
+var twitterText = require('twitter-text');
 var twitter = require('twitter-oauth');
 var twitterAuth = twitter({
   consumerKey: nconf.get('twitterConsumerKey'),
@@ -14,21 +15,39 @@ var twitterToken = nconf.get('twitterToken');
 var twitterTokenSecret = nconf.get('twitterTokenSecret');
 
 
+doTwitterSearch();
+
 function doTwitterSearch() {
+
   twitterAuth.search(twitterQuery, twitterToken, twitterTokenSecret, function (err, results) {
     if(err) {
       console.log(err);
     } else {
-      console.log(results);
 
-      var filteredResults = results.filter(hasURL);
+      var tweets = results.tweets;
+
+      tweets.forEach(function(tweet) {
+        var urls = getURLs(tweet.text);
+        tweet.urls = urls;
+      });
+
+      var tweetsWithURLs = tweets.filter(hasURL);
+
+      tweetsWithURLs.forEach(function(t) {
+        console.log(t.text);
+        console.log(t.urls);
+      });
+
     }
   });
+
 }
 
 
-function hasURL(result) {
-  var text = result.text;
+function getURLs(text) {
+  return twitterText.extractUrlsWithIndices(text);
+}
 
-  return true;
+function hasURL(tweet) {
+  return (tweet.urls.length > 0);
 }
