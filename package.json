@@ -1,0 +1,16 @@
+{
+  "name": "storysearcher",
+  "version": "0.0.0",
+  "description": "search for stories",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "twitter-oauth": "0.0.6",
+    "nconf": "~0.6.9",
+    "request": "~2.33.0"
+  }
+}
