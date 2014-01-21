@@ -13,10 +13,22 @@ var twitterQuery = '"my nerd story" OR #mynerdstory';
 var twitterToken = nconf.get('twitterToken');
 var twitterTokenSecret = nconf.get('twitterTokenSecret');
 
-twitterAuth.search(twitterQuery, twitterToken, twitterTokenSecret, function (err, results) {
-  if(err) {
-    console.log(err);
-  } else {
-    console.log(results);
-  }
-});
+
+function doTwitterSearch() {
+  twitterAuth.search(twitterQuery, twitterToken, twitterTokenSecret, function (err, results) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log(results);
+
+      var filteredResults = results.filter(hasURL);
+    }
+  });
+}
+
+
+function hasURL(result) {
+  var text = result.text;
+
+  return true;
+}
