@@ -9,7 +9,11 @@ var twitterAuth = twitter({
   completeCallback: '/'
 });
 
-twitterAuth.search('"my nerd story" OR #mynerdstory', nconf.get('twitterToken'), nconf.get('twitterTokenSecret'), function (err, results) {
+var twitterQuery = '"my nerd story" OR #mynerdstory';
+var twitterToken = nconf.get('twitterToken');
+var twitterTokenSecret = nconf.get('twitterTokenSecret');
+
+twitterAuth.search(twitterQuery, twitterToken, twitterTokenSecret, function (err, results) {
   if(err) {
     console.log(err);
   } else {
